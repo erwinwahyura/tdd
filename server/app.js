@@ -27,6 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', index)
 
-app.listen(5000)
+app.listen(6000)
 
 module.exports = app;

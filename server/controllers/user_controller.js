@@ -1,19 +1,18 @@
 var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
-const article_model = require('../models/article')
+const user_model = require('../models/user')
 
 var create = function(req, res) {
-  article_model.create(req.body, function(err, result) {
+  user_model.create(req.body, function(err, result) {
     if(!err) res.send(result)
     else res.send(err)
   })
 }
 
 var getAll = function(req, res) {
-  article_model.find({}, function(err, result) {
+  user_model.find({}, function(err, result) {
     if(!err) res.send(result)
-    // if(!err) res.send('this is your artilces data')
     else res.send(err)
   })
 }
@@ -21,18 +20,17 @@ var getAll = function(req, res) {
 var remove = function(req, res) {
   let id = req.params._id
   var myquery = {_id : id}
-  article_model.remove(myquery, function(err, result) {
+  user_model.remove(myquery, function(err, result) {
     if(!err) res.send(result)
-    // if(!err) res.send('this is your artilces data')
     else res.send(err)
   })
 }
 
 var edit = function(req, res, next) {
   let id = req.params._id
-  let query_update = {title: req.body.title, body: req.body.body, createdby: req.body.createdby}
+  let query_update = {name: req.body.name, username: req.body.username, password: req.body.password}
 
-  article_model.findOneAndUpdate({_id:id}, {$set : {title: req.body.title, body: req.body.body, createdby: req.body.createdby}}, function(err, result) {
+  article_model.findOneAndUpdate({_id:id}, {$set : {name: req.body.name, username: req.body.username, password: req.body.password}}, function(err, result) {
     if(!err) res.send(result)
     else res.send(err.message)
   })
